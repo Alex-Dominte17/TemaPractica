@@ -16,12 +16,10 @@ public class Generator {
     public static List<Subscription> generateSubscriptions(int count, Map<String, Double> fieldFrequencies, Map<String, Double> equalityMinFreq) {
         List<Subscription> subscriptions = new ArrayList<>();
 
-        // Calculează exact câte subscripții trebuie să conțină fiecare câmp
         Map<String, Integer> requiredCounts = computeExactCounts(count, fieldFrequencies);
         Map<String, Integer> equalityCounts = computeExactCounts(count, equalityMinFreq);
 
 
-        // Initialize the subscriptions list
         for (int i = 0; i < count; i++) {
             subscriptions.add(new Subscription());
         }
@@ -29,11 +27,9 @@ public class Generator {
         int fieldSize = requiredCounts.size();
         Iterator<String> it = requiredCounts.keySet().iterator();
 
-        // Loop through the fields and assign conditions to subscriptions
         while (fieldSize > 0) {
             String field = it.next();
 
-            // Shuffle and sort subscriptions so empty ones are first
             Collections.shuffle(subscriptions);
             subscriptions.sort(Comparator.comparingInt(sub -> sub.getConditions().isEmpty() ? 0 : 1));
 
@@ -42,21 +38,17 @@ public class Generator {
 
                 String operator;
 
-                // Use "=" if it must appear according to the frequency
                 if (equalityCounts.getOrDefault(field, 0) > 0) {
                     operator = "=";
                     equalityCounts.put(field, equalityCounts.get(field) - 1);
                 } else {
-                    // For categorical fields, only "=" or "!=" should be used
                     if (field.equals("direction") || field.equals("date") || field.equals("city")) {
                         operator = RandomUtils.randomElement(List.of("=", "!="));  // Only "=" or "!=" for categorical fields
                     } else {
-                        // For numeric fields, use the full set of operators
                         operator = RandomUtils.randomElement(Subscription.OPERATORS);
                     }
                 }
 
-                // Generate a value based on the field
                 String value = generateValueForField(field);
                 subscriptions.get(i).addCondition(field, operator, value);
             }
