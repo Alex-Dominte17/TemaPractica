@@ -22,7 +22,6 @@ public class SubscriptionGenerator {
                 field = RandomUtils.randomElement(allFields);
             } while (requiredCounts.getOrDefault(field, 0) <= 0);
 
-            // Decide operator
             String operator;
             if (equalityCounts.getOrDefault(field, 0) > 0) {
                 operator = "=";
