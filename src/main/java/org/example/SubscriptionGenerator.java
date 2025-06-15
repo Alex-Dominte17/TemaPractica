@@ -12,7 +12,6 @@ public class SubscriptionGenerator {
 
         Map<String, Integer> requiredCounts = computeExactCounts(count, fieldFrequencies);
         Map<String, Integer> equalityCounts = new ConcurrentHashMap<>(computeExactCounts(count, equalityMinFreq));
-
         System.out.println(requiredCounts);
         List<String> allFields = new ArrayList<>(fieldFrequencies.keySet());
 
@@ -67,8 +66,10 @@ public class SubscriptionGenerator {
                         String value = generateValueForField(field);
                         sub.addCondition(field, operator, value);
                         assigned++;
-                        if (assigned >= fieldCount) break;
                     }
+                    if (assigned >= fieldCount) {
+                        System.out.println(assigned);break;}
+
 
                 }
 
@@ -89,9 +90,15 @@ public class SubscriptionGenerator {
 
     private static Map<String, Integer> computeExactCounts(int total, Map<String, Double> percentages) {
         Map<String, Integer> counts = new HashMap<>();
-        percentages.forEach((key, percent) -> counts.put(key, (int) Math.round(total * percent)));
+        percentages.forEach((key, percent) -> {
+            int count = (int) Math.round(total * percent);
+            if (count > 0) {
+                counts.put(key, count);
+            }
+        });
         return counts;
     }
+
 
     private static List<Integer> getShuffledIndices(int count, List<Subscription> subscriptions) {
         List<Integer> indices = new ArrayList<>(count);

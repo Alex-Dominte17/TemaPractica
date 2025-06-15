@@ -5,19 +5,18 @@ import java.util.concurrent.atomic.AtomicReference;
 
 public class Main {
     public static void main(String[] args) throws InterruptedException {
-        int numPublications = 1_0_0;
-        //int numSubscriptions = 2_452_129;
-        int numSubscriptions = 100_000;
+        int numPublications = args.length > 0 ? Integer.parseInt(args[0]) : 100;
+        int numSubscriptions = args.length > 1 ? Integer.parseInt(args[1]) : 100;
 
 
         Map<String, Double> fieldFrequencies = Map.of(
-                "city", 0.7,
+                "city", 1.0,
                 "date", 0.5,
-                "temp", 0.6,
-                "wind", 0.5,
-                "direction", 0.8,
-                "stationid",0.9,
-                "rain",0.2
+                "temp", 0.7,
+                "wind", 0.7,
+                "direction", 0.2,
+                "stationid",0.1,
+                "rain",0.7
 
         );
 
