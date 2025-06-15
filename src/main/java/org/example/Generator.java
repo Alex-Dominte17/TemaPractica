@@ -43,7 +43,7 @@ public class Generator {
                     equalityCounts.put(field, equalityCounts.get(field) - 1);
                 } else {
                     if (field.equals("direction") || field.equals("date") || field.equals("city")) {
-                        operator = RandomUtils.randomElement(List.of("=", "!="));  // Only "=" or "!=" for categorical fields
+                        operator = RandomUtils.randomElement(List.of("=", "!="));
                     } else {
                         operator = RandomUtils.randomElement(Subscription.OPERATORS);
                     }

@@ -21,7 +21,7 @@ Map<String, Double> fieldFrequencies = Map.of(
 
 ## Teste de performanță
 
-### Număr subscrieri: 2.452.129
+### Număr subscripții: 2.452.129
 
 #### Timp de execuție (4 rulări) - **Single thread**:
 - 19101ms
@@ -35,7 +35,7 @@ Map<String, Double> fieldFrequencies = Map.of(
 - 10236ms
 - 10599ms
 
-### Număr subscrieri: 100.000
+### Număr subscripții: 100.000
 
 #### Timp de execuție (4 rulări) - **Single thread**:
 - 783ms

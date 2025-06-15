@@ -77,16 +77,13 @@ public class Main {
         for (Subscription subscription : subscriptions) {
             int fieldCount = subscription.getConditions().size();
 
-            // Count how many subscriptions have this number of fields
             subscriptionFieldCountStats.put(fieldCount, subscriptionFieldCountStats.getOrDefault(fieldCount, 0) + 1);
 
-            // Accumulate total per field
             for (String field : subscription.getConditions().keySet()) {
                 totalFieldCounts.put(field, totalFieldCounts.getOrDefault(field, 0) + 1);
             }
         }
 
-        // Print distribution of field counts per subscription
         System.out.println("\nSubscription Field Count Distribution:");
         subscriptionFieldCountStats.forEach((numFields, count) ->
                 System.out.println(numFields + " field(s): " + count + " subscriptions"));
@@ -176,16 +173,13 @@ public class Main {
 //        for (Subscription subscription : subscriptions) {
 //            int fieldCount = subscription.getConditions().size();
 //
-//            // Count how many subscriptions have this number of fields
 //            subscriptionFieldCountStats.put(fieldCount, subscriptionFieldCountStats.getOrDefault(fieldCount, 0) + 1);
 //
-//            // Accumulate total per field
 //            for (String field : subscription.getConditions().keySet()) {
 //                totalFieldCounts.put(field, totalFieldCounts.getOrDefault(field, 0) + 1);
 //            }
 //        }
 //
-//        // Print distribution of field counts per subscription
 //        System.out.println("\nSubscription Field Count Distribution:");
 //        subscriptionFieldCountStats.forEach((numFields, count) ->
 //                System.out.println(numFields + " field(s): " + count + " subscriptions"));
